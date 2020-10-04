@@ -1,0 +1,1 @@
+python3 algorithm_1.py ../data/grocery_transactions.txt
