@@ -22,4 +22,4 @@ def get_frequent_item_count_dict(fin):
             else:
                 item_count_dict[item] = 1
 
-    return OrderedDict(sorted(item_count_dict.items(), key=lambda item:item[1], reverse=True))
+    return (OrderedDict(sorted(item_count_dict.items(), key=lambda item:item[1], reverse=True)), data)
