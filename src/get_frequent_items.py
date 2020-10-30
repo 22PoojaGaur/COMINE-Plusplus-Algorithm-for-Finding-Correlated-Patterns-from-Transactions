@@ -18,7 +18,7 @@ def get_frequent_item_count_dict(fin):
     for trans in data:
         for item in trans:
             if item in item_count_dict:
-                item_count_dict[item]+=1
+                item_count_dict[item] += 1
             else:
                 item_count_dict[item] = 1
 

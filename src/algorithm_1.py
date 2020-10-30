@@ -9,12 +9,23 @@ class Tree:
 
     T = {}
 
+    header = OrderedDict()
+
+    # this dict would store the parent node id for each node id. 
+    # It is one to one mapping and works as the structure is a Tree i.e
+    # each node has at most one parent.
+    parents = {}
+
+    item_counts = {}
+
     node_to_item = {}
 
     def __init__(self):
         self.T[0] = ([], 0)
+        self.header = OrderedDict()
         self.node_to_item = {}
         self.node_gen_count = 0
+        self.item_counts = {}
 
     def contains(self, item, node_ids):
         for node in node_ids:
@@ -47,6 +58,11 @@ class Tree:
             self.T[parent][0].append(self.node_gen_count)
             self.node_to_item[self.node_gen_count] = p
             self.T[self.node_gen_count] = ([], 0)
+            # if we are inserting a new node, add it to header
+            self.header[p].append(self.node_gen_count)
+
+            # add entry for the parent
+            parent[self.node_gen_count] = parent
 
             # print (self.T)
 
@@ -77,7 +93,12 @@ if __name__ == '__main__':
 
     (item_count_dict, data) = get_frequent_items.get_frequent_item_count_dict(fin)
 
+    # initialize tree
     T = Tree()
+    for k in item_count_dict.keys():
+        T.header[k] = []
+    T.item_counts = item_count_dict
+
     sorted_frequent_item = []
     # Root
     for trans in data:
@@ -90,4 +111,7 @@ if __name__ == '__main__':
 
     print ('\n\n')
     pprint.pprint (T.node_to_item)
+
+    print ('\n\n')
+    pprint.pprint (T.header)
 
