@@ -1,23 +1,20 @@
-{0: ([1, 4, 6, 11], 20),
+{0: ([1, 4, 6, 10], 0),
  1: ([2, 8], 11),
- 2: ([3, 15], 8),
+ 2: ([3], 8),
  3: ([], 2),
  4: ([5], 6),
- 5: ([9, 16], 6),
+ 5: ([13], 6),
  6: ([7], 2),
  7: ([], 2),
- 8: ([10], 3),
+ 8: ([9], 3),
  9: ([], 1),
- 10: ([], 1),
+ 10: ([11], 1),
  11: ([12], 1),
- 12: ([13], 1),
- 13: ([14], 1),
- 14: ([], 1),
- 15: ([], 1),
- 16: ([], 1)}
+ 12: ([], 1),
+ 13: ([], 1)}
 
 
-
+Node to item
 {1: 'a',
  2: 'b',
  3: 'e',
@@ -26,22 +23,154 @@
  6: 'e',
  7: 'f',
  8: 'c',
- 9: 'g',
- 10: 'f',
- 11: 'b',
- 12: 'e',
- 13: 'f',
- 14: 'g',
- 15: 'h',
- 16: 'f'}
+ 9: 'f',
+ 10: 'b',
+ 11: 'e',
+ 12: 'f',
+ 13: 'f'}
 
 
-
+Header of tree
 OrderedDict([('a', [1]),
-             ('b', [2, 11]),
+             ('b', [2, 10]),
              ('c', [4, 8]),
              ('d', [5]),
-             ('e', [3, 6, 12]),
-             ('f', [7, 10, 13, 16]),
-             ('g', [9, 14]),
-             ('h', [15])])
+             ('e', [3, 6, 11]),
+             ('f', [7, 9, 12, 13]),
+             ('g', []),
+             ('h', [])])
+
+
+ Running for header key  a
+
+Temp branch for prefix  [1]
+[]
+Beta tree for prefixes of header  a
+{0: ([], 0)}
+node to item map for beta tree
+{}
+{}
+
+
+ Running for header key  b
+
+Temp branch for prefix  [2, 1]
+[('a', 11)]
+NODE TUPLES
+[('a', 11)]
+
+Temp branch for prefix  [10]
+[]
+Beta tree for prefixes of header  b
+{0: ([1], 0), 1: ([], 11)}
+node to item map for beta tree
+{1: 'a'}
+{'a': 1}
+Bj is ->
+a
+Beta ->
+{'b'}
+
+
+ Running for header key  c
+
+Temp branch for prefix  [4]
+[]
+
+Temp branch for prefix  [8, 1]
+[('a', 11)]
+NODE TUPLES
+[('a', 11)]
+Beta tree for prefixes of header  c
+{0: ([1], 0), 1: ([], 11)}
+node to item map for beta tree
+{1: 'a'}
+{'a': 1}
+Bj is ->
+a
+Beta ->
+{'c'}
+
+
+ Running for header key  d
+
+Temp branch for prefix  [5, 4]
+[('c', 6)]
+NODE TUPLES
+[('c', 6)]
+Beta tree for prefixes of header  d
+{0: ([1], 0), 1: ([], 6)}
+node to item map for beta tree
+{1: 'c'}
+{'c': 1}
+Bj is ->
+c
+Beta ->
+{'d'}
+
+
+ Running for header key  e
+
+Temp branch for prefix  [3, 2, 1]
+[]
+
+Temp branch for prefix  [6]
+[]
+
+Temp branch for prefix  [11, 10]
+[]
+Beta tree for prefixes of header  e
+{0: ([], 0)}
+node to item map for beta tree
+{}
+{}
+
+
+ Running for header key  f
+
+Temp branch for prefix  [7, 6]
+[('e', 2)]
+NODE TUPLES
+[('e', 2)]
+
+Temp branch for prefix  [9, 8, 1]
+[]
+
+Temp branch for prefix  [12, 11, 10]
+[('e', 1)]
+NODE TUPLES
+[('e', 1)]
+
+Temp branch for prefix  [13, 5, 4]
+[('d', 6)]
+NODE TUPLES
+[('d', 6)]
+Beta tree for prefixes of header  f
+{0: ([1, 1, 1], 0), 1: ([], 6)}
+node to item map for beta tree
+{1: 'd'}
+{'d': 1, 'e': 1}
+Bj is ->
+e
+Beta ->
+{'f'}
+Bj is ->
+d
+Beta ->
+{'f'}
+
+
+ Running for header key  g
+Beta tree for prefixes of header  g
+{0: ([], 0)}
+node to item map for beta tree
+{}
+{}
+
+
+ Running for header key  h
+Beta tree for prefixes of header  h
+{0: ([], 0)}
+node to item map for beta tree
+{}
+{}
