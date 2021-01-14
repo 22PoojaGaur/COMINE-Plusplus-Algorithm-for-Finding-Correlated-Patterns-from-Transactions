@@ -1,0 +1,256 @@
+DEBUG:root:Running cominek with empty suffix
+DEBUG:root:Header for the tree passed is 
+DEBUG:root:[('a', [<tree.Node object at 0x105f42748>]), ('b', [<tree.Node object at 0x105f42be0>, <tree.Node object at 0x105f42c50>]), ('c', [<tree.Node object at 0x105f42860>, <tree.Node object at 0x105f429b0>]), ('d', [<tree.Node object at 0x105f428d0>]), ('e', [<tree.Node object at 0x105f427f0>, <tree.Node object at 0x105f42908>, <tree.Node object at 0x105f42cf8>]), ('f', [<tree.Node object at 0x105f42978>, <tree.Node object at 0x105f42a58>, <tree.Node object at 0x105f42d30>, <tree.Node object at 0x105f42d68>])]
+DEBUG:root:Process for header item a 
+DEBUG:root:BETA is a
+DEBUG:root:Support of beta is 11 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 18.333333333333336 
+DEBUG:root:All prefixes for header element a is 
+DEBUG:root:[[('a', 11)]]
+DEBUG:root:Beta tree formed for a is 
+DEBUG:root:<tree.Tree object at 0x105f42f98>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105f42f98>
+DEBUG:root:Process for header item b 
+DEBUG:root:BETA is b
+DEBUG:root:Support of beta is 9 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 15.0 
+DEBUG:root:All prefixes for header element b is 
+DEBUG:root:[[('b', 8), ('a', 8)], [('b', 1)]]
+DEBUG:root:Inserting a in beta tree 
+DEBUG:root:Beta tree formed for b is 
+DEBUG:root:<tree.Tree object at 0x105db30f0>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105db30f0>
+DEBUG:root:Running cominek with suffix b and k is 2 
+DEBUG:root:Header for the tree passed is 
+DEBUG:root:[('a', [<tree.Node object at 0x105f4c198>])]
+DEBUG:root:Process for header item a 
+DEBUG:root:BETA is b a
+DEBUG:root:Support of beta is 8 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 13.333333333333334 
+DEBUG:root:All prefixes for header element a is 
+DEBUG:root:[[('a', 8)]]
+DEBUG:root:Beta tree formed for b a is 
+DEBUG:root:<tree.Tree object at 0x105d7eac8>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105d7eac8>
+DEBUG:root:Process for header item c 
+DEBUG:root:BETA is c
+DEBUG:root:Support of beta is 9 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 15.0 
+DEBUG:root:All prefixes for header element c is 
+DEBUG:root:[[('c', 6)], [('c', 3), ('a', 3)]]
+DEBUG:root:Inserting a in beta tree 
+DEBUG:root:Beta tree formed for c is 
+DEBUG:root:<tree.Tree object at 0x105d7eac8>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105d7eac8>
+DEBUG:root:Process for header item d 
+DEBUG:root:BETA is d
+DEBUG:root:Support of beta is 6 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 10.0 
+DEBUG:root:All prefixes for header element d is 
+DEBUG:root:[[('d', 6), ('c', 6)]]
+DEBUG:root:Inserting c in beta tree 
+DEBUG:root:Beta tree formed for d is 
+DEBUG:root:<tree.Tree object at 0x105db30f0>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105db30f0>
+DEBUG:root:Running cominek with suffix d and k is 2 
+DEBUG:root:Header for the tree passed is 
+DEBUG:root:[('c', [<tree.Node object at 0x105f4c2b0>])]
+DEBUG:root:Process for header item c 
+DEBUG:root:BETA is c d
+DEBUG:root:Support of beta is 6 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 10.0 
+DEBUG:root:All prefixes for header element c is 
+DEBUG:root:[[('c', 6)]]
+DEBUG:root:Beta tree formed for c d is 
+DEBUG:root:<tree.Tree object at 0x105f42f98>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105f42f98>
+DEBUG:root:Process for header item e 
+DEBUG:root:BETA is e
+DEBUG:root:Support of beta is 5 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 8.333333333333334 
+DEBUG:root:All prefixes for header element e is 
+DEBUG:root:[[('e', 2), ('b', 2), ('a', 2)], [('e', 2)], [('e', 1), ('b', 1)]]
+DEBUG:root:Beta tree formed for e is 
+DEBUG:root:<tree.Tree object at 0x105f42f98>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105f42f98>
+DEBUG:root:Process for header item f 
+DEBUG:root:BETA is f
+DEBUG:root:Support of beta is 5 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 8.333333333333334 
+DEBUG:root:All prefixes for header element f is 
+DEBUG:root:[[('f', 2), ('e', 2)], [('f', 1), ('c', 1), ('a', 1)], [('f', 1), ('e', 1), ('b', 1)], [('f', 1), ('d', 1), ('c', 1)]]
+DEBUG:root:Inserting e in beta tree 
+DEBUG:root:Inserting e in beta tree 
+DEBUG:root:Inserting d in beta tree 
+DEBUG:root:Beta tree formed for f is 
+DEBUG:root:<tree.Tree object at 0x105db30f0>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105db30f0>
+DEBUG:root:Running cominek with suffix f and k is 2 
+DEBUG:root:Header for the tree passed is 
+DEBUG:root:[('e', [<tree.Node object at 0x105f4c320>]), ('d', [<tree.Node object at 0x105f4c400>])]
+DEBUG:root:Process for header item e 
+DEBUG:root:BETA is e f
+DEBUG:root:Support of beta is 3 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 5.0 
+DEBUG:root:All prefixes for header element e is 
+DEBUG:root:[[('e', 3)]]
+DEBUG:root:Beta tree formed for e f is 
+DEBUG:root:<tree.Tree object at 0x105d7eac8>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105d7eac8>
+DEBUG:root:Process for header item d 
+DEBUG:root:BETA is f d
+DEBUG:root:Support of beta is 1 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 3 
+DEBUG:root:All prefixes for header element d is 
+DEBUG:root:[[('d', 1)]]
+DEBUG:root:Beta tree formed for f d is 
+DEBUG:root:<tree.Tree object at 0x105f4c3c8>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105f4c3c8>
+DEBUG:root:Running cominek with empty suffix
+DEBUG:root:Header for the tree passed is 
+DEBUG:root:[('a', [<tree.Node object at 0x105ee8080>]), ('b', [<tree.Node object at 0x105ee8ef0>, <tree.Node object at 0x105ef6d68>]), ('c', [<tree.Node object at 0x105ef6978>, <tree.Node object at 0x105ef6ac8>]), ('d', [<tree.Node object at 0x105ef69e8>]), ('e', [<tree.Node object at 0x105ef6cf8>, <tree.Node object at 0x105ef6a20>, <tree.Node object at 0x105ef6e10>]), ('f', [<tree.Node object at 0x105ef6a90>, <tree.Node object at 0x105ef6b70>, <tree.Node object at 0x105ef6e48>, <tree.Node object at 0x105ef6e80>])]
+DEBUG:root:Process for header item a 
+DEBUG:root:BETA is a
+DEBUG:root:Support of beta is 11 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 18.333333333333336 
+DEBUG:root:All prefixes for header element a is 
+DEBUG:root:[[('a', 11)]]
+DEBUG:root:Beta tree formed for a is 
+DEBUG:root:<tree.Tree object at 0x105d650f0>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105d650f0>
+DEBUG:root:Process for header item b 
+DEBUG:root:BETA is b
+DEBUG:root:Support of beta is 9 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 15.0 
+DEBUG:root:All prefixes for header element b is 
+DEBUG:root:[[('b', 8), ('a', 8)], [('b', 1)]]
+DEBUG:root:Inserting a in beta tree 
+DEBUG:root:Beta tree formed for b is 
+DEBUG:root:<tree.Tree object at 0x105d30ac8>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105d30ac8>
+DEBUG:root:Running cominek with suffix b and k is 2 
+DEBUG:root:Header for the tree passed is 
+DEBUG:root:[('a', [<tree.Node object at 0x105f002b0>])]
+DEBUG:root:Process for header item a 
+DEBUG:root:BETA is b a
+DEBUG:root:Support of beta is 8 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 13.333333333333334 
+DEBUG:root:All prefixes for header element a is 
+DEBUG:root:[[('a', 8)]]
+DEBUG:root:Beta tree formed for b a is 
+DEBUG:root:<tree.Tree object at 0x105d65908>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105d65908>
+DEBUG:root:Process for header item c 
+DEBUG:root:BETA is c
+DEBUG:root:Support of beta is 9 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 15.0 
+DEBUG:root:All prefixes for header element c is 
+DEBUG:root:[[('c', 6)], [('c', 3), ('a', 3)]]
+DEBUG:root:Inserting a in beta tree 
+DEBUG:root:Beta tree formed for c is 
+DEBUG:root:<tree.Tree object at 0x105d65908>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105d65908>
+DEBUG:root:Process for header item d 
+DEBUG:root:BETA is d
+DEBUG:root:Support of beta is 6 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 10.0 
+DEBUG:root:All prefixes for header element d is 
+DEBUG:root:[[('d', 6), ('c', 6)]]
+DEBUG:root:Inserting c in beta tree 
+DEBUG:root:Beta tree formed for d is 
+DEBUG:root:<tree.Tree object at 0x105d30ac8>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105d30ac8>
+DEBUG:root:Running cominek with suffix d and k is 2 
+DEBUG:root:Header for the tree passed is 
+DEBUG:root:[('c', [<tree.Node object at 0x105f003c8>])]
+DEBUG:root:Process for header item c 
+DEBUG:root:BETA is d c
+DEBUG:root:Support of beta is 6 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 10.0 
+DEBUG:root:All prefixes for header element c is 
+DEBUG:root:[[('c', 6)]]
+DEBUG:root:Beta tree formed for d c is 
+DEBUG:root:<tree.Tree object at 0x105d650f0>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105d650f0>
+DEBUG:root:Process for header item e 
+DEBUG:root:BETA is e
+DEBUG:root:Support of beta is 5 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 8.333333333333334 
+DEBUG:root:All prefixes for header element e is 
+DEBUG:root:[[('e', 2), ('b', 2), ('a', 2)], [('e', 2)], [('e', 1), ('b', 1)]]
+DEBUG:root:Beta tree formed for e is 
+DEBUG:root:<tree.Tree object at 0x105d650f0>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105d650f0>
+DEBUG:root:Process for header item f 
+DEBUG:root:BETA is f
+DEBUG:root:Support of beta is 5 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 8.333333333333334 
+DEBUG:root:All prefixes for header element f is 
+DEBUG:root:[[('f', 2), ('e', 2)], [('f', 1), ('c', 1), ('a', 1)], [('f', 1), ('e', 1), ('b', 1)], [('f', 1), ('d', 1), ('c', 1)]]
+DEBUG:root:Inserting e in beta tree 
+DEBUG:root:Inserting e in beta tree 
+DEBUG:root:Inserting d in beta tree 
+DEBUG:root:Beta tree formed for f is 
+DEBUG:root:<tree.Tree object at 0x105d30ac8>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105d30ac8>
+DEBUG:root:Running cominek with suffix f and k is 2 
+DEBUG:root:Header for the tree passed is 
+DEBUG:root:[('e', [<tree.Node object at 0x105f00438>]), ('d', [<tree.Node object at 0x105f00518>])]
+DEBUG:root:Process for header item e 
+DEBUG:root:BETA is e f
+DEBUG:root:Support of beta is 3 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 5.0 
+DEBUG:root:All prefixes for header element e is 
+DEBUG:root:[[('e', 3)]]
+DEBUG:root:Beta tree formed for e f is 
+DEBUG:root:<tree.Tree object at 0x105d65908>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105d65908>
+DEBUG:root:Process for header item d 
+DEBUG:root:BETA is d f
+DEBUG:root:Support of beta is 1 
+DEBUG:root:All conf for beta is 1.0 
+DEBUG:root:Support limit for beta is 3 
+DEBUG:root:All prefixes for header element d is 
+DEBUG:root:[[('d', 1)]]
+DEBUG:root:Beta tree formed for d f is 
+DEBUG:root:<tree.Tree object at 0x105f004e0>
+DEBUG:root:Final beta tree after node deletion is 
+DEBUG:root:<tree.Tree object at 0x105f004e0>

@@ -1,3 +1,6 @@
+import logging
+logging.basicConfig(filename='../data/run.log', level=logging.DEBUG)
+
 import get_frequent_items
 import sys
 from collections import OrderedDict
@@ -5,7 +8,10 @@ import copy
 import pprint
 import comine_k
 from tree import Tree
+from data import Data
 import globals
+
+
 
 
 def sort_transaction(trans, item_count_dict):
@@ -26,31 +32,40 @@ def sort_transaction(trans, item_count_dict):
 
 
 if __name__ == '__main__':
-    fin = open(sys.argv[1], 'r')
+    # initialize Data class
+    D = Data()
+    D.read_data(sys.argv[1])
 
-    (item_count_dict, data) = get_frequent_items.get_frequent_item_count_dict(fin)
+    print ("Supports ")
+    pprint.pprint(D.supports)
 
     # initialize tree
     T = Tree()
-    for k in item_count_dict.keys():
-        T.header[k] = []
-    T.item_counts = item_count_dict
 
     sorted_frequent_item = []
-    # Root
-    for trans in data:
-        sorted_trans = sort_transaction(trans, item_count_dict)
-        # print (sorted_trans)
-        T.insert_tree(sorted_trans[0], sorted_trans[1:], 0)
-        # print ('\n')
+    for trans in D.transactions:
+        sorted_trans = sort_transaction(trans, D.supports)
+        print("processing transaction ", ' '.join(sorted_trans))
+        T.insert_transaction(sorted_trans)
 
-    pprint.pprint(T.T)
+    T.print()
 
-    print ('\n\nNode to item')
-    pprint.pprint (T.node_to_item)
+    # print('\n\nNode to item')
+    # pprint.pprint(T.node_to_item)
 
-    print ('\n\nHeader of tree')
-    pprint.pprint (T.header)
+    print('\n\nHeader of tree')
+    pprint.pprint(T.header)
 
-    comine_k.cominek(T, None, 1)
+    # for v in T.header.items():
+    #     print (v[0])
+    #     print (sum([int(n.node_count) for n in v[1]]))
+    #
+    # it = sorted(T.header.items(), key=lambda v: sum([int(n.node_count) for n in v[1]]))
+
+    # print(it)
+
+    # print ("List of all nodes")
+    # print (T.get_all_nodes())
+
+    comine_k.cominek(T, suffix=None, k=1, data=D)
 

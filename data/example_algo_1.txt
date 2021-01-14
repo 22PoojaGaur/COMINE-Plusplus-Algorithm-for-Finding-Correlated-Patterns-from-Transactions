@@ -1,176 +1,137 @@
-{0: ([1, 4, 6, 10], 0),
- 1: ([2, 8], 11),
- 2: ([3], 8),
- 3: ([], 2),
- 4: ([5], 6),
- 5: ([13], 6),
- 6: ([7], 2),
- 7: ([], 2),
- 8: ([9], 3),
- 9: ([], 1),
- 10: ([11], 1),
- 11: ([12], 1),
- 12: ([], 1),
- 13: ([], 1)}
-
-
-Node to item
-{1: 'a',
- 2: 'b',
- 3: 'e',
- 4: 'c',
- 5: 'd',
- 6: 'e',
- 7: 'f',
- 8: 'c',
- 9: 'f',
- 10: 'b',
- 11: 'e',
- 12: 'f',
- 13: 'f'}
+Supports 
+OrderedDict([('a', 11),
+             ('b', 9),
+             ('c', 9),
+             ('d', 6),
+             ('e', 5),
+             ('f', 5),
+             ('g', 2),
+             ('h', 1)])
+processing transaction  a b
+processing transaction  a b e
+processing transaction  c d
+processing transaction  e f
+processing transaction  c d
+processing transaction  a c
+processing transaction  a b
+processing transaction  e f
+processing transaction  c d
+processing transaction  a b
+processing transaction  a b
+processing transaction  a c f
+processing transaction  a b e
+processing transaction  b e f
+processing transaction  c d
+processing transaction  a b
+processing transaction  c d
+processing transaction  a c
+processing transaction  a b
+processing transaction  c d f
+a : b c
+c : d
+e : f
+b : e
+b : e
+c : f
+d : f
+f : 
+e : f
+e : 
+f : 
+f : 
+f : 
 
 
 Header of tree
-OrderedDict([('a', [1]),
-             ('b', [2, 10]),
-             ('c', [4, 8]),
-             ('d', [5]),
-             ('e', [3, 6, 11]),
-             ('f', [7, 9, 12, 13]),
-             ('g', []),
-             ('h', [])])
+{'a': [<tree.Node object at 0x105ee8080>],
+ 'b': [<tree.Node object at 0x105ee8ef0>, <tree.Node object at 0x105ef6d68>],
+ 'c': [<tree.Node object at 0x105ef6978>, <tree.Node object at 0x105ef6ac8>],
+ 'd': [<tree.Node object at 0x105ef69e8>],
+ 'e': [<tree.Node object at 0x105ef6cf8>,
+       <tree.Node object at 0x105ef6a20>,
+       <tree.Node object at 0x105ef6e10>],
+ 'f': [<tree.Node object at 0x105ef6a90>,
+       <tree.Node object at 0x105ef6b70>,
+       <tree.Node object at 0x105ef6e48>,
+       <tree.Node object at 0x105ef6e80>]}
+FINAL BETA  a
 
-
- Running for header key  a
-
-Temp branch for prefix  [1]
+Temp branch for prefix  [('a', 11)]
 []
-Beta tree for prefixes of header  a
-{0: ([], 0)}
-node to item map for beta tree
 {}
+FINAL BETA  b
+
+Temp branch for prefix  [('b', 8), ('a', 8)]
+[('a', 8)]
+
+Temp branch for prefix  [('b', 1)]
+[]
+a : 
+PATTERN HERE  b a
+a : 
+{'a': [<tree.Node object at 0x105f002b0>]}
+FINAL BETA  b a
+
+Temp branch for prefix  [('a', 8)]
+[]
 {}
+FINAL BETA  c
 
-
- Running for header key  b
-
-Temp branch for prefix  [2, 1]
-[('a', 11)]
-NODE TUPLES
-[('a', 11)]
-
-Temp branch for prefix  [10]
-[]
-Beta tree for prefixes of header  b
-{0: ([1], 0), 1: ([], 11)}
-node to item map for beta tree
-{1: 'a'}
-{'a': 1}
-Bj is ->
-a
-Beta ->
-{'b'}
-
-
- Running for header key  c
-
-Temp branch for prefix  [4]
+Temp branch for prefix  [('c', 6)]
 []
 
-Temp branch for prefix  [8, 1]
-[('a', 11)]
-NODE TUPLES
-[('a', 11)]
-Beta tree for prefixes of header  c
-{0: ([1], 0), 1: ([], 11)}
-node to item map for beta tree
-{1: 'a'}
-{'a': 1}
-Bj is ->
-a
-Beta ->
-{'c'}
+Temp branch for prefix  [('c', 3), ('a', 3)]
+[('a', 3)]
+a : 
+{'a': [<tree.Node object at 0x105f00278>]}
+FINAL BETA  d
 
-
- Running for header key  d
-
-Temp branch for prefix  [5, 4]
+Temp branch for prefix  [('d', 6), ('c', 6)]
 [('c', 6)]
-NODE TUPLES
-[('c', 6)]
-Beta tree for prefixes of header  d
-{0: ([1], 0), 1: ([], 6)}
-node to item map for beta tree
-{1: 'c'}
-{'c': 1}
-Bj is ->
-c
-Beta ->
-{'d'}
+c : 
+PATTERN HERE  d c
+c : 
+{'c': [<tree.Node object at 0x105f003c8>]}
+FINAL BETA  d c
 
-
- Running for header key  e
-
-Temp branch for prefix  [3, 2, 1]
+Temp branch for prefix  [('c', 6)]
 []
-
-Temp branch for prefix  [6]
-[]
-
-Temp branch for prefix  [11, 10]
-[]
-Beta tree for prefixes of header  e
-{0: ([], 0)}
-node to item map for beta tree
 {}
+FINAL BETA  e
+
+Temp branch for prefix  [('e', 2), ('b', 2), ('a', 2)]
+[]
+
+Temp branch for prefix  [('e', 2)]
+[]
+
+Temp branch for prefix  [('e', 1), ('b', 1)]
+[]
 {}
+FINAL BETA  f
 
-
- Running for header key  f
-
-Temp branch for prefix  [7, 6]
-[('e', 2)]
-NODE TUPLES
+Temp branch for prefix  [('f', 2), ('e', 2)]
 [('e', 2)]
 
-Temp branch for prefix  [9, 8, 1]
+Temp branch for prefix  [('f', 1), ('c', 1), ('a', 1)]
 []
 
-Temp branch for prefix  [12, 11, 10]
-[('e', 1)]
-NODE TUPLES
+Temp branch for prefix  [('f', 1), ('e', 1), ('b', 1)]
 [('e', 1)]
 
-Temp branch for prefix  [13, 5, 4]
-[('d', 6)]
-NODE TUPLES
-[('d', 6)]
-Beta tree for prefixes of header  f
-{0: ([1, 1, 1], 0), 1: ([], 6)}
-node to item map for beta tree
-{1: 'd'}
-{'d': 1, 'e': 1}
-Bj is ->
-e
-Beta ->
-{'f'}
-Bj is ->
-d
-Beta ->
-{'f'}
+Temp branch for prefix  [('f', 1), ('d', 1), ('c', 1)]
+[('d', 1)]
+e : 
+d : 
+PATTERN HERE  e f
+e : 
+{'e': [<tree.Node object at 0x105f00438>], 'd': [<tree.Node object at 0x105f00518>]}
+FINAL BETA  e f
 
-
- Running for header key  g
-Beta tree for prefixes of header  g
-{0: ([], 0)}
-node to item map for beta tree
-{}
+Temp branch for prefix  [('e', 3)]
+[]
 {}
 
-
- Running for header key  h
-Beta tree for prefixes of header  h
-{0: ([], 0)}
-node to item map for beta tree
-{}
+Temp branch for prefix  [('d', 1)]
+[]
 {}

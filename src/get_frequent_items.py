@@ -25,7 +25,7 @@ def get_frequent_item_count_dict(fin):
                 item_count_dict[item] = 1
 
     sorted_item_tuples = sorted(item_count_dict.items(), key=lambda item: item[1], reverse=True)
-    result_dict = OrderedDict()
+    result_dict = OrderedDict() # dictionary with key: item_name, value: count. Sorted by count
     for (item, count) in sorted_item_tuples:
         result_dict[item] = count
 
