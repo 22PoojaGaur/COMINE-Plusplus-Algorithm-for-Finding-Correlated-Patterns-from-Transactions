@@ -1,0 +1,32 @@
+import os
+import sys
+
+if __name__ == '__main__':
+	all_transaction = sys.argv[1]
+	all_patterns = sys.argv[2]
+
+	dataset = []  # list of set of transactions
+	patterns = [] # list of set of patterns
+
+	support = {} # dictionary tuple to count
+
+	with open(all_transaction, 'r') as f:
+		for l in f.readlines():
+			dataset.append(set(l.strip().split(';')))
+	with open(all_patterns, 'r') as f:
+		for l in f.readlines():
+			support[tuple(l.strip().split(' '))] = 0
+
+	for pset in support.keys():
+		for itemset in dataset:
+			if set(pset).issubset(itemset):
+				support[pset] += 1
+
+
+
+	ofile = open('out_patterns.txt', 'w')
+	for (pset, pcount) in support.items():
+		ofile.write(' '.join(pset) + ' ' + str(pcount) + '\n')
+
+	ofile.close()
+

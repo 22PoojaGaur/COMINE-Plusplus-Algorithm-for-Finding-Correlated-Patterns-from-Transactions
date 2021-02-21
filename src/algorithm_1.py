@@ -36,8 +36,8 @@ if __name__ == '__main__':
     D = Data()
     D.read_data(sys.argv[1])
 
-    print ("Supports ")
-    pprint.pprint(D.supports)
+    # print ("Supports ")
+    # pprint.pprint(D.supports)
 
     # initialize tree
     T = Tree()

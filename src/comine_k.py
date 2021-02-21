@@ -37,6 +37,18 @@ def find_max_support_with_nc(pattern, sup_counts):
     return max_support
 
 
+def make_pattern(p1, p2):
+
+    p1 = p1 if type(p1) == list else [p1]
+    p2 = p2 if type(p2) == list else [p2]
+
+    pattern = list(set(p1).union(set(p2)))
+
+    print ("CONVERT " + ' '.join(pattern))
+
+    return pattern
+
+
 def find_support(pattern, supports):
     """
     This method considers support of a pattern as the minimum support among its items
@@ -133,7 +145,7 @@ def cominek(T, suffix=None, k=1, data=None, support_suffix=0):
             beta = [ai]
             support_beta = T.get_item_support(ai)
         else:
-            beta = list(set(suffix).union(set(ai)))
+            beta = make_pattern(suffix, ai)
             support_beta = min(support_suffix, T.get_item_support(ai))
 
         logging.debug('BETA is %s', ' '.join(beta))
@@ -189,14 +201,23 @@ def cominek(T, suffix=None, k=1, data=None, support_suffix=0):
         for node in beta_tree.get_all_nodes():
             if node.item is None:
                 continue
-            pattern = list(set(beta).union(set(node.item)))
+            print ('DEBUG: ', ' '.join(beta), str(node.item))
+            pattern = make_pattern(beta, node.item)
+            # pattern = list(set(beta).union(set(node.item)))
+            print ('DEBUG: ', ' '.join(pattern))
             pattern_support = min(support_beta, beta_tree.get_item_support(node.item))
+            max_support = T.max_support(pattern)
+            logging.debug('DEBUG: max support for %s is %s', ' '.join(pattern), str(max_support))
             if pattern_support < MIN_SUPPORT:
                 # delete this node
+                print('DEBUG: calling to delete node')
+                print (node.item)
                 beta_tree.delete_node(node)
 
-            elif pattern_support / T.max_support(pattern) < MIN_ALL_CONF:
+            elif pattern_support / max_support < MIN_ALL_CONF:
                 # delete this node
+                print('DEBUG: calling to delete node')
+                print(node.item)
                 beta_tree.delete_node(node)
             else:
                 print ('PATTERN HERE ', ' '.join(pattern))

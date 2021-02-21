@@ -4,14 +4,38 @@ import queue
 import logging
 
 
+class IdGenerator:
+    """
+    The ids have many to 1 relationship with the itemnames.
+    """
+
+    def __init__(self):
+        self.id_count = 0
+        self.id_to_node = {}
+
+    def get_new_id(self, node):
+        self.id_count += 1
+        self.id_to_node[self.id_count] = node
+        return self.id_count
+
+    def get_node_for_id(self, id):
+        try:
+            return self.id_to_node[id]
+        except KeyError:
+            raise ValueError("This id is not valid, " + str(id))
+
+
 class Node:
 
-    def __init__(self, item_name=None, id=None, children=None, nc=1):
+    def __init__(self, item_name=None, id=None, children=None, nc=1, id_gen=None):
         if children is None:
             children = {}
         self.children = children
         self.item = item_name
-        self.id = id
+        if id_gen is not None:
+            self.id = id_gen.get_new_id(self)
+        else:
+            self.id = id
         self.parent = None
         self.node_count = nc
 
@@ -29,25 +53,19 @@ class Tree:
         self.root = Node()  # root node
 
         self.header = {}  # list of nodes where each branch of that item starts, key=item_name, value=list of nodes
-
-        self.T = {0: ([], 0)}
-        # self.header = OrderedDict()
-        self.node_to_item = {}
-        self.item_to_node = {}
-        self.node_gen_count = 0
-        self.item_counts = {}
-        self.parents = {}
+        self.id_generator = IdGenerator()  # id generator for this tree
 
     def get_header_sorted(self):
         # returns header sorted by item support counts
         it = sorted(self.header.items(), key=lambda v: sum([n.node_count for n in v[1]]), reverse=True)
-        #logging.debug(it)
         return it
 
     def get_item_support(self, item):
         sup = 0
         if item not in self.header:
-            return 0
+            # raise ValueError("The item passed does not belong to this tree, " + str(item))
+            return 0  # TODO: not sure why pass should work
+
         for node in self.header[item]:
             sup += node.node_count
         return sup
@@ -66,8 +84,7 @@ class Tree:
                         current = current.children[child]
                         cur_support = min(cur_support, current.node_count)
                 else:
-                    logging.error('This state is not considered, suffix not present in children')
-                    return -1
+                    raise ValueError("Suffix is not present in children. This should not happen, " + child.item)
 
             total_support += cur_support
 
@@ -95,7 +112,7 @@ class Tree:
         current = self.root
         for t in range(len(trans)):
             if trans[t] not in current.children:
-                new_child = Node(trans[t], nc=nc)
+                new_child = Node(trans[t], nc=nc, id_gen=self.id_generator)
                 current.add_child(new_child)
                 if trans[t] in self.header:
                     self.header[trans[t]].append(new_child)
@@ -118,24 +135,26 @@ class Tree:
             sorted_level = sorted(new_level, key=lambda k: k.item)
             cidx = 0
             merged_level = []
-            while cidx < len(sorted_level)-1:
-                if sorted_level[cidx].item != sorted_level[cidx+1].item:
+            while cidx < len(sorted_level) - 1:
+                if sorted_level[cidx].item != sorted_level[cidx + 1].item:
                     merged_level.append(sorted_level[cidx])
                     cidx += 1
                     continue
                 else:
                     # modify header
                     self.header[sorted_level[cidx].item].remove(sorted_level[cidx])
-                    self.header[sorted_level[cidx].item].remove(sorted_level[cidx+1])
+                    self.header[sorted_level[cidx].item].remove(sorted_level[cidx + 1])
 
                     for child in sorted_level[cidx].children:
-                        if child in sorted_level[cidx+1].children:
-                            sorted_level[cidx+1].children[child] += sorted_level[cidx].children[child]
+                        if child in sorted_level[cidx + 1].children:
+                            sorted_level[cidx + 1].children[child].node_count += sorted_level[cidx].children[
+                                child].node_count
                         else:
-                            sorted_level[cidx+1].children[child] = sorted_level[cidx].children[child]
-                    del prev_level.children[sorted_level[cidx].item]
+                            sorted_level[cidx + 1].children[child] = sorted_level[cidx].children[child]
+                    # del prev_level.children[sorted_level[cidx].item]
                     sorted_level[cidx + 1].node_count += sorted_level[cidx].node_count
-                    self.header[sorted_level[cidx+1].item].append(sorted_level[cidx + 1])
+
+                    self.header[sorted_level[cidx + 1].item].append(sorted_level[cidx + 1])
                     cidx += 1
             new_level = []
             for node in merged_level:
@@ -159,76 +178,6 @@ class Tree:
                 return True, node
         return False, None
 
-    def insert_tree(self, p, P, parent):
-        """
-        p: item to insert
-        P: remaining list of items in transaction
-        tree: tree
-        parent: node to insert item on
-        """
-        # print ('inserting ', p)
-
-        # self.T[parent] = (self.T[parent][0], self.T[parent][1] + 1)
-
-        (contains, idx) = self.contains(p, self.T[parent][0])
-        if contains:
-            self.T[idx] = (self.T[idx][0], self.T[idx][1] + 1)
-
-            if len(P) != 0:
-                self.insert_tree(P[0], P[1:], idx)
-
-            # # print (self.T)
-            # # p belongs to children of child
-            # if len(P) != 0:
-            #     self.insert_tree(P[0], P[1:], idx)
-            # else:
-            #     self.T[idx] = (self.T[idx][0], self.T[idx][1] + 1)
-        else:
-            # get id for a new node i.e self.node_gen_count + 1
-            self.node_gen_count += 1
-            self.T[parent][0].append(self.node_gen_count)
-            self.node_to_item[self.node_gen_count] = p
-            self.T[self.node_gen_count] = ([], 1)
-            # if we are inserting a new node, add it to header
-            self.header[p].append(self.node_gen_count)
-
-            # add entry for the parent
-            self.parents[self.node_gen_count] = parent
-
-            # print (self.T)
-            if len(P) != 0:
-                self.insert_tree(P[0], P[1:], self.node_gen_count)
-
-            # if len(P) != 0:
-            #     self.insert_tree(P[0], P[1:], self.node_gen_count)
-            # else:
-            #     self.T[self.node_gen_count] = (self.T[self.node_gen_count][0], self.T[self.node_gen_count][1] + 1)
-
-    def insert_branch(self, node_tuples):
-        print('NODE TUPLES')
-        print(node_tuples)
-        # start from root
-        current_level = 0
-        node_gen_count = 1
-        for node_name, node_count in node_tuples:
-
-            if node_name in self.item_to_node.keys():
-                pass
-            else:
-                self.item_to_node[node_name] = node_gen_count
-                self.node_to_item[node_gen_count] = node_name
-                node_gen_count += 1
-
-            (contains, idx) = self.contains(self.item_to_node[node_name], self.T[current_level][0])
-
-            if contains:
-                self.T[idx] = (self.T[idx][0], self.T[idx][1] + node_count)
-
-                current_level = idx
-            else:
-                self.T[current_level][0].append(self.item_to_node[node_name])
-                self.T[self.item_to_node[node_name]] = ([], node_count)
-
     def get_all_nodes(self):
         result = []
 
@@ -246,14 +195,25 @@ class Tree:
     def delete_node(self, node):
         this_parent = node.parent
 
+        print('DEBUG: this parent')
+        print(this_parent == self.root)
+        print(this_parent.children)
+        print(this_parent.item)
+
         if this_parent is None:
             pass
         else:
-            del this_parent.children[node.item]
+            # this is a hacky way to handle the case where children A - B C and children B - C, and we want to delete B.
+            try:
+                del this_parent.children[node.item]
+            except KeyError:
+                pass
 
         for n in node.children:
             node.children[n].parent = this_parent
-            this_parent.children[node.children[n].item] = node.children[n]
+            # this is a hacky way to handle the case where children A - B C and children B - C, and we want to delete B.
+            if node.children[n].item not in this_parent.children:
+                this_parent.children[node.children[n].item] = node.children[n]
 
     def count_nodes(self):
         return len(self.get_all_nodes())
